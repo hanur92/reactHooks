@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import ReactDom from "react-dom";
 
-function App() {
+const App = () => {
+  const [item, setItem] = useState(1);
+  const increment = () => {
+    setItem(item + 1);
+  };
+  const decrement = () => {
+    setItem(item - 1);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={increment}>+</button>
+      <div>{item}</div>
+      <button onClick={decrement}>-</button>
     </div>
   );
-}
+};
 
 export default App;
