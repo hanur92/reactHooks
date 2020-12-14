@@ -2,42 +2,30 @@ import "./App.css";
 import React, { useState } from "react";
 import ReactDom from "react-dom";
 
-const useInput = (initValue, validator) => {
-  const [value, setValue] = useState(initValue);
-  const onChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    let willUpdate = true;
-    if (typeof validator === "function") {
-      willUpdate = validator(value);
-    }
-    if (willUpdate) {
-      setValue(value);
-    }
-  };
-  return { value, onChange };
+const content = [
+  { tab: "Section1", content: "내가 섹션1의 콘텐트" },
+  { tab: "Section2", content: "내가 섹션2의 콘텐트" },
+  { tab: "Section3", content: "내가 섹션3의 콘텐트" },
+  { tab: "Section4", content: "내가 섹션4의 콘텐트" },
+];
+
+const useTabs = (initTab, allTabs) => {
+  if (!allTabs || !Array.isArray(allTabs)) {
+    return;
+  }
+  const [currIDX, setcurIDX] = useState(initTab);
+  return { currITEM: allTabs[currIDX], changeITEM: setcurIDX };
 };
 
 const App = () => {
-  const maxLen = (value) => !value.includes("@");
-  const name = useInput("Mr.", maxLen);
-  const [item, setItem] = useState(1);
-  const increment = () => {
-    setItem(item + 1);
-  };
-  const decrement = () => {
-    setItem(item - 1);
-  };
+  const { currITEM, changeITEM } = useTabs(0, content);
   return (
     <div className="App">
-      <h1>Hello {item}</h1>
-      <h2>start editing to see some magin happen !</h2>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
-      {/* <input placeholder="Name" value={name.value} onChange={name.onChange} /> */}
-      <input placeholder="Name" {...name} />
-      {console.log({ ...name })}
+      <h1>Hello </h1>
+      {content.map((section, idx) => (
+        <button onClick={changeITEM(idx)}>{section.tab}</button>
+      ))}
+      <div> {currITEM.content}</div>
     </div>
   );
 };
