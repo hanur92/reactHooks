@@ -10,10 +10,10 @@ const content = [
 ];
 
 const useTabs = (initTab, allTabs) => {
+  const [currIDX, setcurIDX] = useState(initTab);
   if (!allTabs || !Array.isArray(allTabs)) {
     return;
   }
-  const [currIDX, setcurIDX] = useState(initTab);
   return { currITEM: allTabs[currIDX], changeITEM: setcurIDX };
 };
 
@@ -23,7 +23,7 @@ const App = () => {
     <div className="App">
       <h1>Hello </h1>
       {content.map((section, idx) => (
-        <button onClick={changeITEM(idx)}>{section.tab}</button>
+        <button onClick={() => changeITEM(idx)}>{section.tab}</button>
       ))}
       <div> {currITEM.content}</div>
     </div>
