@@ -1,28 +1,26 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Nav from "./Nav";
 
 const App = () => {
   // const input = useRef(initialValue);
+  const [name, setName] = useState();
   const [number, setNumber] = useState(0);
-  const [numType, setNumType] = useState("zero");
-  const checkNumbtype = (num) => {
-    console.log("useEffect");
-    if (num % 2 === 1) {
-      setNumType("odd");
-      console.log("odd");
-    } else if (num % 2 === 0) {
-      setNumType("even");
-      console.log("even");
-    }
-  };
-  useEffect(checkNumbtype(number));
+
   return (
     <div className="App">
-      <h1>Hello</h1>
+      <h1>Hello {name}</h1>
+      <textarea
+        className="text"
+        onSubmit={() => {
+          setName(document.querySelector(".text").value);
+        }}
+      ></textarea>
+      {console.log(document.querySelector("text"))}
       <button onClick={() => setNumber(number + 1)}>+</button>
       <div>{number}</div>
       <button onClick={() => setNumber(number - 1)}>-</button>
-      <h2>{numType}</h2>
+      <Nav number={number}></Nav>
     </div>
   );
 };
@@ -36,4 +34,4 @@ export default App;
 //?2. {number} % 2 = 1 => odd
 //?3. {number} % 2 = 0 => even
 //?4. module화
-//?5. useState 사용
+//?5. useState 사용 -> X
